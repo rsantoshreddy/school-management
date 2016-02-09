@@ -1,0 +1,47 @@
+<script type="text/javascript" src="/js/dust-core-min.js"></script>
+
+<script type="text/dust" id="gowithit">
+	<p>content goes here {#people}{firstName} {lastName}<br>{/people}</p>
+</script>
+    <div id="results"></div>
+
+<script>
+	var data = {
+	    "people": [
+	        { 'firstName': 'Clark', 'lastName': 'Kent' },
+	        { 'firstName': 'Bruce', 'lastName': 'Wayne' },
+	        { 'firstName': 'Peter', 'lastName': 'Parker' }
+	    ]
+	}
+	var src=document.getElementById('gowithit').textContent;
+	var compiled = dust.compile(src,"people")
+	dust.loadSource(compiled);
+	dust.render("people", data, function(err, out) {
+	    document.getElementById('results').innerHTML = out;
+	});
+</script>
+
+$("#generate").on("click",function(){
+		$("#payment-form").slideUp();
+		$("#bill").slideDown();
+		$("#bill-details").bindObject(globalStudent);
+	});
+	
+	
+$.fn.bindObject=function(plainObj){
+		var eles= $(this).find("span[id]");
+		eles.each(function(index){
+			$this=$(this);
+			$this.text(plainObj[$this.attr("id")]);
+		});
+		return eles;
+	}
+
+	$.fn.bindFormToObject=function(plainObj){
+		var eles= $(this).find("span[id]");
+		eles.each(function(index){
+			$this=$(this);
+			$this.text(plainObj[$this.attr("id")]);
+		});
+		return eles;
+	}

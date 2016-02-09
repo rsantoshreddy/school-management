@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+	{>"partials/header"/}
+<body>
+	{>"partials/page-header"/}
+	{>"partials/login-form"/}
+</body>
+</html>
+
+    

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+{>"partials/header"/}
+<body>
+	{>"partials/page-header"/}
+	<section class="container">
+		<div class="row">
+		  {>"partials/side-menu" dash="dash"/}
+		  
+		  <div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-1">
+			  	{#students}
+				  	<div class="media">
+					  <div class="media-left">
+					    <a href="#">
+					      <img class="media-object" src="{?photo}/photos/{photo}{:else} /images/avatar.png{/photo}" alt="...">
+					    </a>
+					  </div>
+					  <div class="media-body">
+					  	<span class="close glyphicon glyphicon-remove-circle"></span>
+					    <h4 class="media-heading">{name} ({roll_number})</h4>
+					    <p>Class: {level} | Stream : {stream} | Academic Session : {academic_session} | College : {college_name} | Contact No : {cell_no}</p>
+					  </div>
+					</div>
+				{/students}
+		  </div>
+
+		</div>
+	</section>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".close").on("click",function(){
+			var $this=$(this);
+			$this.closest("div.media").slideUp("slow");
+		});
+	});
+	</script>
+</body>
+</html>

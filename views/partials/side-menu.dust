@@ -1,0 +1,25 @@
+<div class="col-md-12 menu">
+  	<ul>
+  		<li>
+  			<a href="/dashboard" class="{?dash}{dash}{/dash}">Home</a>
+  		</li>
+  		<li>
+  			<a href="/register-student" class="{?register}{register}{/register}">Register</a>
+  		</li>
+  		<li>
+  			<a href="/payments" class="{?pay}{pay}{/pay}">Receive Payment</a>
+  		</li>
+		<li>
+			<a href="/register" class="{?resUser}{resUser}{/resUser}">Register Users</a>
+		</li>
+		<li>
+			<a href="/register-test" class="{?test}{test}{/test}">Register Test</a>
+		</li>
+		<li>
+			<a href="/collection-report" class="{?collection}{collection}{/collection}">Collection Report</a>
+		</li>
+		{?profile}
+		<li><a href="/register" class="{profile}">Profile</a></li>
+		{/profile}
+  	</ul>
+</div>

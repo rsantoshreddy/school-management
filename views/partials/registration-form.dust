@@ -1,0 +1,184 @@
+<div id="loginbox" class="mainbox col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-2 margin_top_50">                    
+    <div class="panel panel-info" >
+        <div class="panel-heading">
+            <div class="panel-title">Admition form</div>
+        </div>     
+
+        <div class="panel-body padding-top-30" >
+            {?successMsg}{successMsg}{/successMsg}
+            {?error}{error}{/error}
+            <form class="form-horizontal" method="post">
+            {!hidden input fields start!}
+				<input type="hidden" name="_csrf" value="{csrfToken}" />
+			{!hidden input fields end!}
+                
+			{!Name!}
+			  <div class="form-group">
+			    <label for="sname" class="col-sm-4 control-label">Name of the student</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="sname" id="sname" class="form-control" placeholder="Name of the student" />
+			    </div>
+			  </div> 
+
+			{!Parents name!}
+			  <div class="form-group">
+			    <label for="parentName" class="col-sm-4 control-label">Father's/Parent's name</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="parentName" id="parentName" class="form-control" placeholder="Father's/Parent's name"/>
+			    </div>
+			  </div>
+
+			  {!Academic session!}
+			  	<div class="form-group">
+		    	<label for="academicSession"  class="col-sm-4 control-label">Academic Session</label>
+				  <div class="col-sm-8">
+				  <select class="form-control" name="academicSession" id="academicSession">
+				    <option value="-1">Select Session</option>
+				    <option value="2012-2014">2012-2014</option>
+				    <option value="2013-2015">2013-2015</option>
+				    <option value="2014-2016">2014-2016</option>
+				    <option value="2015-2017">2015-2017</option>
+				    <option value="2016-2018">2016-2018</option>
+				    <option value="2017-2019">2017-2019</option>
+				    <option value="2018-2020">2018-2020</option>
+				  </select>
+				</div>
+				</div>
+
+			  {!Level!}
+			  <div class="form-group">
+		    	<label for="level"  class="col-sm-4 control-label">Class</label>
+				  <div class="col-sm-8">
+				  <select class="form-control" name="level" id="level">
+				    <option value="-1">Select Class</option>
+				    <option value="+2">+2</option>
+				    <option value="+3">+3</option>
+				  </select>
+				</div>
+				</div>
+
+			  {!Stream!}
+			  <div class="form-group">
+		    	<label for="stream"  class="col-sm-4 control-label">Stream</label>
+				  <div class="col-sm-8">
+				  <select class="form-control" name="stream" id="stream">
+				    <option value="-1">Select Stream</option>
+				    <option value="arts">Arts</option>
+				    <option value="commerce">Commerce</option>
+				    <option value="science">Science</option>
+				  </select>
+				</div>
+				</div>
+
+			  {!Roll number!}
+			  <div class="form-group">
+			    <label for="rollNumber" class="col-sm-4 control-label">Roll number</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="rollNumber" id="rollNumber" class="form-control" placeholder="Roll number"/>
+			    </div>
+			  </div>
+
+			  {!DOA!}
+			  <div class="form-group">
+			    <label for="admissionDate"  class="col-sm-4 control-label">Date of admission</label>
+			    <div class="col-sm-8">
+			      <input type="text" id="admissionDate" name="admissionDate" class="form-control" placeholder="Date of admission"/>
+			    </div>
+			  </div>
+
+			  {!Mode of Payment!}
+			  <div class="form-group">
+		    	<label for="paymenetMode"  class="col-sm-4 control-label">Mode of Payment</label>
+				  <div class="col-sm-8">
+				  <select class="form-control" name="paymenetMode" id="paymenetMode">
+				    <option value="-1">Select Payment mode</option>
+				    <option value="monthly">Monthly</option>
+				    <option value="quarterly">Quarterly</option>
+				    <option value="yearly">Yearly</option>
+				  </select>
+				</div>
+				</div>
+
+			   {!Monthly/Annual Fees!}
+			  <div class="form-group">
+			    <label for="fees"  class="col-sm-4 control-label">Monthly/Annual Fees</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="fees" id="fees" class="form-control" placeholder="Monthly/Annual Fees"/>
+			    </div>
+			  </div>  
+
+			  {!Negotiated Fees!}
+			  <div class="form-group">
+			    <label for="negFees"  class="col-sm-4 control-label">Negotiated Fees</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="negFees" id="negFees" class="form-control" placeholder="Negotiated Fees"/>
+			    </div>
+			  </div>
+
+			  {!College Name!}
+			  <div class="form-group">
+			    <label for="collegeName"  class="col-sm-4 control-label">College Name</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="collegeName" id="collegeName"  class="form-control" placeholder="College Name"/>
+			    </div>
+			  </div> 
+
+			  {!Mobile Number!}
+			  <div class="form-group">
+			    <label for="cellNo"  class="col-sm-4 control-label">Mobile Number</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="cellNo" id="cellNo" class="form-control" placeholder="Mobile Number"/>
+			    </div>
+			  </div>
+
+			  {!Present Address!}
+			  <div class="form-group">
+			    <label for="presAddress"  class="col-sm-4 control-label">Present Address</label>
+			    <div class="col-sm-8">
+			    	<textarea name="presAddress" id="presAddress" class="form-control" rows="5"></textarea>
+			    </div>
+			  </div>
+
+			  {!Permanent Address!}
+			  <div class="form-group">
+			    <label for="permAddress"  class="col-sm-4 control-label">Permanent Address</label>
+			    <div class="col-sm-8">
+			    	<textarea name="permAddress" id="permAddress"  class="form-control" rows="5"></textarea>
+			    </div>
+			  </div>  
+
+			  {!Photo!}
+			  <div class="form-group">
+			    <label for="imagefile"  class="col-sm-4 control-label">Photo</label>
+			    <div class="col-sm-8 rel">
+			    	<input type="text" class="form-control filename" readonly="true" />
+	                    <span class="btn btn-primary btn-file">
+	                        Browse <input type="file" id="imagefile" name="photo" />
+	                    </span>
+			    </div>
+			  </div>  
+
+			  <div class="form-group">
+			    <div class="col-sm-6 col-md-offset-3">
+			      <button type="submit" class="btn btn-primary btn-block">Register</button>
+			    </div>
+			  </div>
+            </form>     
+        </div>                     
+    </div>  
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$( "#admissionDate").datepicker({
+		  showAnim: "slideDown"
+		});
+		$("#imagefile").on("change", function(){
+			var inputFile = $(this);
+			var look = $("input.filename");
+			look.val(inputFile.val());
+		});
+	});
+
+</script>

@@ -1,0 +1,124 @@
+{?student}
+<div class="col-lg-12 col-sm-12">
+    <div class="card hovercard">
+        <div class="card-background">
+            <img class="card-bkimg" alt="" src="photos/{student.photo}">
+        </div>
+        <div class="useravatar">
+            <img alt="" src="photos/{student.photo}">
+        </div>
+        <div class="card-info"> 
+            <span class="card-title">{student.name}</span>
+        </div>
+    </div>
+    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group">
+        <div class="btn-group" role="group">
+            <button type="button" id="stars" class="btn btn-primary" href="#tab1">
+                <span class="glyphicon glyphicon-star"></span>
+                <div class="hidden-xs">Basic Details</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="favorites" class="btn btn-default" href="#tab2">
+                <span class="glyphicon glyphicon-education"></span>
+                <div class="hidden-xs">Academic Details</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="following" class="btn btn-default" href="#tab3">
+                <span class="glyphicon glyphicon-usd"></span>
+                <div class="hidden-xs">Payment Details</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="following" class="btn btn-default" href="#tab4">
+                <span class="glyphicon glyphicon-calendar"></span>
+                <div class="hidden-xs">Attendance</div>
+            </button>
+        </div>
+    </div>
+
+    <div class="well">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+            <h3>{student.name}</h3>
+            <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                <p><span class="bold">Roll Number</span> : {student.roll_number}</p>
+                <p><span class="bold">Class</span> : {student.level} {student.stream}</p>
+                <p><span class="bold">College</span> : {student.college_name}</p>
+                <p><span class="bold">Academic Session</span> : {student.academic_session}</p>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <p><span class="bold">Parent's</span> : {student.parent_name}</p>
+                <p><span class="bold">contact no</span> : {student.cell_no}</p>
+                <p><span class="bold">Present Address</span> : {student.pres_address}</p>
+                <p><span class="bold">Permanent Address</span> : {student.perm_address}</p>
+                
+            </div>
+            </div>
+        </div>
+        <div class="tab-pane fade in" id="tab2">
+          <h3>This is tab 2</h3>
+        </div>
+        <div class="tab-pane fade in" id="tab3">
+          <h3>Negotiation fees : {student.neg_fees}</h3>
+          <div class="row">
+          {?student.payments}
+                <table class="table table-hover">
+                   <thead> 
+                        <tr> 
+                            <th>Bill No</th> 
+                            <th>Date</th> 
+                            <th>For Month</th> 
+                            <th>Amount</th> 
+                            <th>Received By</th> 
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {#paymentSummary.payments}
+                        <tr>
+                            <th>{bill_number}</th>
+                            <td>{payment_date}</td>
+                            <td>{for_month}</td>
+                            <td>{installment_fee}</td>
+                            <td>{received_by}</td>
+                        </tr>
+                        {/paymentSummary.payments}
+                        <tr>
+                            <th>Total</th>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>{paymentSummary.total}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            {/student.payments}
+          </div>
+        </div>
+        <div class="tab-pane fade in" id="tab4">
+          <h3>This is tab 4</h3>
+        </div>
+      </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+    $(".btn-pref button").on("click", function() {
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        var tab=$(this).removeClass("btn-default")
+                        .addClass("btn-primary").attr("href"); 
+        $(".tab-pane").removeClass("active");
+        $(tab).addClass("active");
+
+    });
+});
+</script>
+{:else}
+<div class="col-lg-12 col-sm-12 center-text">
+    <p> No Student found with searched roll number.</p>
+</div>
+{/student}

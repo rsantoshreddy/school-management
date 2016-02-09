@@ -1,0 +1,214 @@
+<div id="loginbox" class="mainbox col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-2 margin_top_50">                    
+    <div class="panel panel-info" id="form-pannel">
+        <div class="panel-heading">
+            <div class="panel-title">Payment form</div>
+        </div>     
+        <div class="panel-body padding-top-30" >
+            <p class="error form-error"></p>
+            <form class="form-horizontal" id="payment-form" method="post">
+            
+			  <input type="hidden" name="billNumber" id="billNumber" class="form-control" value="default"/>
+
+             {!Roll number!}
+			  <div class="form-group">
+			    <label for="rollNumber" class="col-sm-4 control-label">Roll number</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="rollNumber" id="rollNumber" class="form-control" placeholder="Roll number"/>
+			    </div>
+			  </div>
+
+			{!Name!}
+			  <div class="form-group">
+			    <label for="sname" class="col-sm-4 control-label">Name of the student</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="sname" id="sname" class="form-control" placeholder="Name of the student" value="" readonly="readonly" />
+			      <input type="hidden" name="level" id="level" class="form-control" value="" />
+			      <input type="hidden" name="stream" id="stream" class="form-control" value="" />
+			    </div>
+			  </div> 
+
+			  {!Fees!}
+			  <div class="form-group">
+			    <label for="installmentFee"  class="col-sm-4 control-label">Fees</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="installmentFee" id="installmentFee" class="form-control" placeholder="Fees"/>
+			    </div>
+			  </div>
+
+			   {!For the month of!}
+			  <div class="form-group">
+			    <label for="formonth"  class="col-sm-4 control-label">For the month of</label>
+			    <div class="col-sm-8">
+			      <select class="form-control" name="formonth" id="formonth">
+				    <option value="-1">Select Month</option>
+				    {#months}
+				    	<option value="{.}">{.}</option>
+				    {/months}
+				  </select>
+			    </div>
+			  </div>
+
+			  {!Date of Payment!}
+			  <div class="form-group">
+			    <label for="paymentdate"  class="col-sm-4 control-label">Date of payment</label>
+			    <div class="col-sm-8">
+			      <input type="text" id="paymentdate" name="paymentdate" class="form-control" placeholder="Payment Date"/>
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <div class="col-sm-6 col-md-offset-3">
+			      <button type="button" class="btn btn-primary btn-block" id="generate">Generate Bill</button>
+			    </div>
+			  </div>
+            </form>  
+        </div>                     
+    </div>  
+     <div class="panel panel-info" id="bill">
+        <div class="panel-heading">
+            <div class="panel-title">Payment Bill</div>
+        </div>     
+        <div class="panel-body padding-top-30" >
+        	<div class="row">
+        		<div class="col-sm-3 center-text">
+        			<img src="/images/avatar.png" class="bill-logo"/>
+        		</div>
+        		<div class="col-sm-6 center-text bill-headline">
+        			<h1>OMEGA</h1>
+        			<h2>Institutions</h2>
+        			<h3>Chennai Tamilnadu (600119)</h3>
+        		</div>
+        		<div class="col-sm-3 center-text">
+        			<p>Mobile: 9437091953</p>
+        		</div>
+        	</div>
+        	<div class="row margin_top_10">
+        		<div class="col-sm-12">
+        			<div class="bill-meta margin_bottom_15">
+        				<p class="col-sm-4">
+        					<span class="bold">Serial No:</span> 
+        					<span id="bill-number"></span>
+        				</p>
+        				<p class="center-text col-sm-4 box">
+        					Money Receipt
+        				</p>
+        				<p class="col-sm-4 right-text">
+        					<span class="bold">Date:</span> 
+        					<span id="des-paymentdate"></span>
+        				</p>
+        			</div>
+        			<div id="bill-details">
+        				<p>Mr./Miss 
+        					<span class="underline" >
+        						<span id="des-sname">
+        						</span> 
+    							(<span class="underline" id="des-rollNumber">
+    							</span>)
+        					</span> of class 
+        					<span class="underline"> 
+        						<span id="des-level"></span> 
+        						<span id="des-stream"></span>
+        					</span> 
+        						for the month/instalment of 
+        						<span class="underline" id="des-formonth"></span> towards development of the Institution.
+        				</p>
+        				<p class="box">Rs. <span id="des-installmentFee"></span></p>
+        			</div>
+        		</div>
+        		<div class="col-sm-6 col-md-offset-3">
+			      <button type="submit" form="payment-form" class="btn btn-primary btn-block" id="submit-payment">Confirm and Submit</button>
+			    </div>
+        	</div>
+        	
+        </div>                     
+    </div>  
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+	$( "#paymentdate").datepicker({
+		showAnim: "slideDown"
+	});
+	
+	$("#rollNumber").on('change',function(){
+		var $this=$(this);
+		$.get( "/student", {rollNumber: $this.val()})
+		.done(function(student) {
+		  	if(student && student.name){
+		  		
+		  		$('input#sname')
+		  			.removeClass("error success")
+		  			.addClass('success')
+		  			.val(student.name);
+
+		    	$('input#level').val(student.level);
+		    	$('input#stream').val(student.stream);
+
+			}else{
+
+				$('#sname')
+					.removeClass("error success")
+					.addClass('error')
+					.val('Please enter correct roll number');
+			}
+		})
+		.fail(function() {
+		  	notify($('#sname'), 'error', 'Please enter correct roll number');
+		});
+	});
+
+	$("#generate").on("click", function(e){
+		var formError=false;
+		var formFields=$(this).closest('form').serializeArray();
+		$.each(formFields, function(index){
+			if(formFields[index].value){
+				$("#des-"+formFields[index].name).text(formFields[index].value);
+			}else{
+				$(".form-error").text("Please complete the form");
+				formError=true;
+			}
+		});
+		
+		if(!formError){
+			$.get( "/generateBill")
+			.done(function(billNumber) {
+			  	$("#bill-number").text(billNumber);
+			  	$("#billNumber").val(billNumber);
+			})
+			.fail(function() {
+			  	$("#bill-number").text("error");
+			});
+
+			$("#form-pannel").slideUp();
+			$("#bill").slideDown();
+		}
+	});
+
+	$("#payment-form").on("submit", function(e){
+		e.preventDefault();
+		var serForm=$(this).serializeArray();
+		var data={};
+
+		$.each(serForm,function(){
+			data[this.name]=this.value;
+		});
+
+		console.log(data);
+		$.post("/payments",{data: data})
+			.done(function(bill) {
+			  	if(bill){
+			  		onPrintFinished(window.print());
+			  	}
+			})
+			.fail(function() {
+			  	$("#bill-number").text("error");
+			});
+	});
+
+	var onPrintFinished=function(printed){
+		location.reload();
+	}
+});
+
+</script>

@@ -1,0 +1,50 @@
+To clean modules: 
+=================
+npm prune
+
+To update modules: 
+===================
+npm update
+
+Start of MongoDB
+=================
+1. Go to mongo db bin folder
+	cd C:\MongoDB\bin
+2. set DB path
+	mongod --dbpath C:\MongoDB\data
+3. open new cmd window and go to mongo db bin folder
+	cd C:\MongoDB\bin
+4. Start mongo db 
+	mongo
+
+Delete a database: 
+===================
+	db.dropDatabase()
+Create a database: 
+===================
+use <dbname>
+
+see all tables in the database:
+===============================
+db.getCollectionNames()
+
+insert data to a table: 
+=========================
+db.<table name>.save(<object name>) //Saves or inserts or updates data
+	or
+db.<table name>.insert(<object name>) //only for insertion
+
+get all the objects in a table:
+==================================
+	db.<table name>.find().pretty();
+
+Remove a collection:
+=====================
+db.collectionName.remove({});
+
+Node dates
+console.log("Start"); //Start
+console.log(new Date());//todays date
+console.log(Date);//function date
+console.log(Date.now);//function date
+console.log("End") //end

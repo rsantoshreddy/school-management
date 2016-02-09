@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+	{>"partials/header" utilHeader="true" /}
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
+<body>
+	{>"partials/page-header"/}
+	{>"partials/side-menu" profile="profile"/}
+	{>"partials/profile-page"/}
+</body>
+</html>

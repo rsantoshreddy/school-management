@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+	{>"partials/header"/}
+<body>
+	{>"partials/page-header"/}
+	{>"partials/side-menu" resUser="resUser"/}
+	{>"partials/register-user-from"/}
+</body>
+</html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+	{>"partials/header" utilHeader="true" /}
+<body>
+	{>"partials/page-header"/}
+	{>"partials/side-menu" collection="collection"/}
+	{>"partials/collection-page"/}
+</body>
+</html>

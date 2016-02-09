@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+	{>"partials/header" utilHeader="true" /}
+<body>
+	{>"partials/page-header"/}
+	{>"partials/side-menu" pay="pay"/}
+	{>"partials/payment-form"/}
+</body>
+</html>

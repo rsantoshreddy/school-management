@@ -1,0 +1,8 @@
+<head>
+	<title>{title}</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/page.css">
+	{?utilHeader}
+		<link rel="stylesheet" type="text/css" href="/css/jquery.css">
+	{/utilHeader}
+</head>
