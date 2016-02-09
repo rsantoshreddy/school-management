@@ -81,7 +81,7 @@
                             <th>{bill_number}</th>
                             <td>{payment_date}</td>
                             <td>{for_month}</td>
-                            <td>{installment_fee}</td>
+                            <td>{bill_amount}</td>
                             <td>{received_by}</td>
                         </tr>
                         {/paymentSummary.payments}
