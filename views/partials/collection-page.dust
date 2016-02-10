@@ -46,7 +46,6 @@
         </tr>
     </tfoot>
 </table>
-	
 {/report}
 </div>
 <script type="text/javascript" src="js/jquery.js"></script>
