@@ -117,13 +117,19 @@ controllers.getPayments=function(req, res){
 /*post payments handler*/
 controllers.receivePayments=function(req, res){
 	var data=req.body.data;
-	var payment=new models.Payment({
-		installment_fee: data.installmentFee,
+	var payment=new models.Bill({
+		bill_number: data.billNumber,
+		bill_amount: data.installmentFee,
+		bill_date: data.paymentdate,
 		for_month: data.formonth,
-		payment_date: data.paymentdate,
-		received_by: req.user.name,
-		bill_number: data.billNumber
+		received_by: req.user.name
 	});
+	
+	console.log(typeof data.billNumber);
+	console.log(typeof payment.bill_number);
+	
+	console.log(typeof data.installmentFee);
+	console.log(typeof payment.bill_amount);
 
 	//update({condition},{update},{options},callback)
 	models.Student.update({roll_number: data.rollNumber},{$push:{payments: payment}},function(err, dbmodel){
@@ -135,32 +141,11 @@ controllers.receivePayments=function(req, res){
 			console.log(dbmodel);
 		}
 		
-		var url="/updateBills?billNumber="+data.billNumber
-				+"&billAmount="+data.installmentFee
-				+"&date="+data.paymentdate
-				+"&session="+data.formonth
-				+"&receieveBy="+req.user.name
-				+"&payer="+data.rollNumber
-				+"&payerName="+data.sname;
+		//Add name and roll number to update bill
+		payment.payee_rollnumber= data.rollNumber;
+		payment.payee_name= data.name;
 
-		res.redirect(url);
-	
-	});
-}
-
-
-/*update bills*/
-controllers.updateBills=function(req, res){
-		var bill=new models.Bill({
-			bill_number: parseInt(req.query.billNumber),
-			bill_amount: parseInt(req.query.billAmount),
-			bill_date: req.query.date,
-			biller: req.query.receieveBy,
-			payee: req.query.payer,
-			payee_name: req.query.payerName
-		});
-		
-		bill.save(function(err, dbBill){
+		payment.save(function(err, dbBill){
 			if(err){
 				console.log("Bill Update error");
 				console.log(err);
@@ -170,6 +155,7 @@ controllers.updateBills=function(req, res){
 			}
 			res.send(dbBill);
 		});
+	});
 }
 
 /*get student handler*/
@@ -211,9 +197,18 @@ controllers.search=function(req, res){
 	//console.log("Search page");
 	var query=req.query.candidate_rollnumber;
 	models.Student.findOne({roll_number:query}, function(err, student){
-		res.locals.student=student;
-		res.locals.paymentSummary=getPaymentSummary(student.payments);
-		res.render("profile", {title:"Profile"})
+		if(err){
+			var error="Something went wrong. Please try again."
+			res.render("dashboard", {title:"Dashboard", error: error});
+		}
+		if(!student){
+			req.session.errorMsg="No student found with the queried Roll Number..:(";
+			res.redirect("/dashboard");
+		}else{
+			res.locals.student=student;
+			res.locals.paymentSummary=getPaymentSummary(student.payments);
+			res.render("profile", {title:"Profile"});
+		}
 	});
 }
 
@@ -226,13 +221,12 @@ controllers.getCollectionReport=function(req, res){
 }
 
 controllers.showCollectionReport=function(req, res){
-	var fromDate=req.body.fromdate;
-	var toDate=req.body.todate;
+	var fromDate=new Date(req.body.fromdate);
+	var toDate=new Date(req.body.todate);
 
 	models.Bill.find(function(err, bills){
-		var billreport=getPaymentSummary(bills, fromDate, toDate);
-		console.log(billreport)
-		res.locals.report=billreport;
+		res.locals.report=getPaymentSummary(bills, fromDate, toDate);
+		console.log(res.locals.report);
 		res.render('collection',{title:"Collections"});
 	});
 }
@@ -245,8 +239,8 @@ controllers.logout=function(req, res){
 }
 
 
-
-function getPaymentSummary(pays){
+/*General Functions*/
+function getPaymentSummary(payments){
 	var paymentSummary={
 			total: 0,
 			payments: []
@@ -254,30 +248,31 @@ function getPaymentSummary(pays){
 	var fromDate= arguments[1] || "";
 	var toDate= arguments[2] || "";
 
-	for(var i=0; i< pays.length; i++){
+	for(var i=0; i< payments.length; i++){
 		var payment={};
-			payment.bill_number=pays[i].bill_number;
-			payment.payment_date=new Date(pays[i].payment_date).toDateString();
-			payment.received_by=pays[i].received_by;
-			payment.for_month=pays[i].for_month;
-			payment.installment_fee=pays[i].installment_fee;
-			if(pays[i].payee_name)
-			payment.payee_name=pays[i].payee_name;
+			payment.bill_number=payments[i].bill_number;
+			payment.bill_date=new Date(payments[i].bill_date).toDateString();
+			payment.received_by=payments[i].received_by;
+			payment.for_month=payments[i].for_month;
+			payment.bill_amount=payments[i].bill_amount;
+			if(payments[i].payee_name)
+			payment.payee_name=payments[i].payee_name;
 
 		if(!(fromDate || toDate)){
-			paymentSummary.total+=parseInt(pays[i].installment_fee);
+			paymentSummary.total+=parseInt(payments[i].bill_amount);
 			paymentSummary.payments.push(payment);
 		}else{
-			console.log(payment.payment_date >= fromDate);
-			console.log(payment.payment_date <= toDate);
-
-			if( payment.payment_date >= fromDate && payment.payment_date <= toDate){
+			var paymentdate=new Date(payment.bill_date).getTime();
+			console.log(paymentdate);
+			console.log(fromDate);
+			console.log(toDate);
+			
+			if(  paymentdate >= fromDate && paymentdate <= toDate){
 				console.log("true");
-				paymentSummary.total+=parseInt(pays[i].installment_fee);
+				paymentSummary.total+=parseInt(payments[i].bill_amount);
 				paymentSummary.payments.push(payment);
 			}
 		}
-
 	}
 	return paymentSummary;
 }

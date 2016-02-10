@@ -22,6 +22,7 @@
 			    <label for="sname" class="col-sm-4 control-label">Name of the student</label>
 			    <div class="col-sm-8">
 			      <input type="text" name="sname" id="sname" class="form-control" placeholder="Name of the student" value="" readonly="readonly" />
+			      <input type="hidden" name="name" id="name" class="form-control" value="" />
 			      <input type="hidden" name="level" id="level" class="form-control" value="" />
 			      <input type="hidden" name="stream" id="stream" class="form-control" value="" />
 			    </div>
@@ -142,6 +143,7 @@ $(function(){
 		  			.addClass('success')
 		  			.val(student.name);
 
+		    	$('input#name').val(student.name);
 		    	$('input#level').val(student.level);
 		    	$('input#stream').val(student.stream);
 

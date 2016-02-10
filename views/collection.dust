@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	{>"partials/header" utilHeader="true" /}
+	<link rel="stylesheet" type="text/css" href="css/datatable.css">
 <body>
 	{>"partials/page-header"/}
 	{>"partials/side-menu" collection="collection"/}

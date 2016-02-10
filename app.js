@@ -65,7 +65,7 @@ module.exports=function(){
 	app.get('/student', myauth.requreLogin, routes.getStudent);
 	app.get('/generateBill', myauth.requreLogin, routes.generateBill);
 	
-	app.get('/updateBills', myauth.requreLogin, routes.updateBills);
+	//app.get('/updateBills', myauth.requreLogin, routes.updateBills);
 
 	app.get('/search', myauth.requreLogin, routes.search);
 	

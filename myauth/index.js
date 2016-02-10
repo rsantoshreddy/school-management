@@ -7,8 +7,10 @@ myauth.isUserExist= function(req, res, next){
 				req.user= user.toObject();
 				delete req.user.password;
 				req.session.user= req.user;
-				res.locals.user=req.user;
-		    } 
+        res.locals.user=req.user;
+				res.locals.errorMsg=req.session.errorMsg;
+        delete req.session.errorMsg
+		  } 
 		    next();
 		});
 	}else{
