@@ -21,6 +21,10 @@ controllers.dashboard=function(req, res){
 /*register user page renderer*/
 controllers.registerUser=function(req, res){
 	var msg=res.locals.successMsg;
+	models.Streams.find(function(err, dbStudents) {
+	    res.locals.students=dbStudents;	
+		res.render('dashboard',{title:"Dashboard"});
+    });
 	res.render('register-user', {/*csrfToken: req.csrfToken(),*/ msg:msg});
 }
 
@@ -30,7 +34,10 @@ register student page renderer
 controllers.registerStudent=function(req, res){
 	res.locals.successMsg=req.session.successMsg;
 	delete req.session.successMsg;
-	res.render('register-student', {/*csrfToken: req.csrfToken(),*/ title:'Student registration'});
+	models.Streams.find(function(err, streams){
+		res.locals.streams=streams;
+		res.render('register-student', {/*csrfToken: req.csrfToken(),*/ title:'Student registration'});
+	});
 }
 
 /*save student data from register page*/
@@ -125,12 +132,6 @@ controllers.receivePayments=function(req, res){
 		received_by: req.user.name
 	});
 	
-	console.log(typeof data.billNumber);
-	console.log(typeof payment.bill_number);
-	
-	console.log(typeof data.installmentFee);
-	console.log(typeof payment.bill_amount);
-
 	//update({condition},{update},{options},callback)
 	models.Student.update({roll_number: data.rollNumber},{$push:{payments: payment}},function(err, dbmodel){
 		if(err){
@@ -167,6 +168,11 @@ controllers.getStudent=function(req, res){
 		}
 		res.send(dbStudent);	
 	});
+}
+
+/*get subjects handler*/
+controllers.getSubjects=function(req, res){
+		res.send(models.SUBJECTS[req.query.stream]);	
 }
 
 controllers.generateBill=function(req, res){
@@ -216,6 +222,52 @@ controllers.resisterTest=function(req, res){
 	res.render('exam',{title:"Exam details"});
 }
 
+controllers.addStream=function(req, res){
+	res.render('stream',{title:"Add Stream"});
+}
+controllers.saveStream=function(req, res){
+	var optionals=[];
+	var compulsories=[];
+
+	var inputOpt=req.body.optional;
+	var optFullmarks=req.body.optional_fullmarks;
+		console.log(inputOpt);
+		console.log(inputOpt.length);
+
+	for(var i=0; inputOpt.length>i; i++){
+		var subject=new models.Subject({
+			name: inputOpt[i],
+			fullMarks:optFullmarks[i]
+		});
+		console.log(subject);
+		optionals.push(subject);
+	};
+
+	var inputComp=req.body.compulsory;
+	var compFullmarks=req.body.compulsory_fullmarks;
+
+	for(var i=0; inputComp.length>i; i++){
+		var subject=new models.Subject({
+			name: inputComp[i],
+			fullMarks:compFullmarks[i]
+		});
+		compulsories.push(subject);
+	};
+	
+
+	var StreamObj=new models.Streams({
+		name:req.body.stream,
+		optionals:optionals,
+		compulsory:compulsories
+	});
+
+	StreamObj.save(function(err){
+		if(err){
+			console.log(err)
+		}
+		res.redirect('/addStream');
+	});
+}
 controllers.getCollectionReport=function(req, res){
 	res.render('collection',{title:"Collections"});
 }
