@@ -61,6 +61,8 @@ module.exports=function(){
 	app.get('/payments', myauth.requreLogin, routes.getPayments);
 	app.post('/payments', myauth.requreLogin, routes.receivePayments);
 	
+	app.get('/getSubjects', myauth.requreLogin, routes.getSubjects);
+	
 	/*get Student*/
 	app.get('/student', myauth.requreLogin, routes.getStudent);
 	app.get('/generateBill', myauth.requreLogin, routes.generateBill);
@@ -70,6 +72,9 @@ module.exports=function(){
 	app.get('/search', myauth.requreLogin, routes.search);
 	
 	app.get('/register-test', myauth.requreLogin, routes.resisterTest);
+	
+	app.get('/addStream', myauth.requreLogin, routes.addStream);
+	app.post('/addStream', myauth.requreLogin, routes.saveStream);
 
 	app.get('/collection-report', myauth.requreLogin, routes.getCollectionReport);
 	app.post('/collection-report', myauth.requreLogin, routes.showCollectionReport);

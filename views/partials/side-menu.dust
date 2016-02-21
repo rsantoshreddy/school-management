@@ -18,6 +18,9 @@
 		<li>
 			<a href="/collection-report" class="{?collection}{collection}{/collection}">Collection Report</a>
 		</li>
+		<li>
+			<a href="/addStream" class="{?stream}{stream}{/stream}">Add Stream</a>
+		</li>
 		{?profile}
 		<li><a href="/register" class="{profile}">Profile</a></li>
 		{/profile}

@@ -51,8 +51,9 @@
 				  <div class="col-sm-8">
 				  <select class="form-control" name="level" id="level">
 				    <option value="-1">Select Class</option>
-				    <option value="+2">+2</option>
-				    <option value="+3">+3</option>
+				    {#streams}
+				    	<option>{name}</option>
+				    {/streams}
 				  </select>
 				</div>
 				</div>
@@ -68,7 +69,22 @@
 				    <option value="science">Science</option>
 				  </select>
 				</div>
+			</div>
+
+			<div class="form-group">
+		    	<label for="subjects"  class="col-sm-4 control-label">Subjects Opted</label>
+				  <div class="col-sm-8">
+					  <div class="checkbox" id="optionals">
+					    
+					 </div>
+					 <div class="checkbox" id="compulsory">
+					    
+					 </div>
+					
 				</div>
+			</div>
+
+			
 
 			  {!Roll number!}
 			  <div class="form-group">
@@ -166,6 +182,7 @@
             </form>     
         </div>                     
     </div>  
+    {subject}
 </div>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
@@ -178,6 +195,28 @@
 			var inputFile = $(this);
 			var look = $("input.filename");
 			look.val(inputFile.val());
+		});
+
+
+		$("#stream").on("change",function(){
+			var stream= $(this).val();
+			$.get("/getSubjects", {stream: stream}).done(function(subjects){
+				var optionals=subjects.optionals;
+				var compulsory=subjects.compulsory;
+				$("#optionals,#compulsory").html("");
+					for(subj in optionals){
+						$('#optionals').append( "<label><input type='checkbox' name='subjects' value='"+optionals[subj]+"'/>"+optionals[subj]+"</label>")
+					}
+					for(subj in compulsory){
+						$('#compulsory').append( "<label><input type='checkbox' name='subjects' value='"+compulsory[subj]+"' checked/>"+compulsory[subj]+"</label>")
+					}
+			});
+		});
+
+		$('body').on('click', '#optionals label input[type=checkbox]', function() {
+			console.log($(this));
+			$("#optionals").find("input[type=checkbox]").attr("disabled", true);
+			$(this).removeAttr("disabled");
 		});
 	});
 

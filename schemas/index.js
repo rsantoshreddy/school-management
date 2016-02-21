@@ -12,7 +12,8 @@ var user=new mongoose.Schema({
 
 var subject=new mongoose.Schema({
 		name: {type: String, required: true},
-		marks: {type: Number, require: true}
+		marks: {type: Number, require: true},
+		fullMarks:{type: Number, require: true}
 	},
 		{versionKey: false}
 	);
@@ -24,6 +25,13 @@ var test=new mongoose.Schema({
 		{versionKey: false}
 	);
 
+var stream=new mongoose.Schema({
+	name:{type:String, required:true, unique:true},
+	optionals:[subject],
+	compulsory:[subject]
+	},
+		{versionKey: false}
+	);
 
 var bill= new mongoose.Schema({
 		bill_number: {type: Number, required: true, unique: true},
@@ -57,12 +65,29 @@ var student=new mongoose.Schema({
 		},{versionKey: false});
 
 var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var SUBJECTS={
+	"arts": {
+			"optionals": ["MIL(TAMIL)", "MIL(SANSKRIT)", "MIL(HINDI)", "MIL(ALT. ENG.)"],
+			"compulsory": ["ENGLISH", "HISTORY", "POLITICAL SCIENCE", "ECONOMICS", "EDUCATION", "OPTIONAL TAMIL", "IRPM", "HOME SCIENCE","PSYCHOLOGY", "LOGIC"]
+			},
+	"commerce": {
+			"optionals": ["ENGLISH", "MIL(TAMIL)", "MIL(SANSKRIT)", "MIL(HINDI)", "MIL(ALT. ENG.)"],
+			"compulsory": ["ACCOUNTANCY", "COST ACCOUNTING", "BUSINESS STUDIES AND MANAGEMENT", "BUSINESS MATHEMATICS AND STATISTICS", "COMPUTER APPLICATION", "IT", "BANKING AND INSURANCE", "MANAGEMENT ACCOUNTING", "COMPANY ACCOUNTING", "FUNDAMENTALS OF ENTREPRENUERSHIP", "SALESMANSHIP"]
+			},
+	"science": {
+			"optionals": ["MIL(TAMIL)", "MIL(SANSKRIT)", "MIL(HINDI)", "MIL(ALT. ENG.)"],
+			"compulsory": ["ENGLISH", "PHYSICS", "CHEMISTRY", "MATHEMATICS", "BOTANY", "ZOOLOGY", "IT", "ELECTRONICS", "GEOLOGY", "COMPUTER SCIENCE", "STATISTICS"]
+			}
+	};
 
 var models={
 	User : mongoose.model("Users", user),
 	Student : mongoose.model("Students", student),
 	Bill : mongoose.model("Bills", bill),
-	MONTHS: MONTHS
+	MONTHS: MONTHS,
+	SUBJECTS: SUBJECTS,
+	Subject: mongoose.model("Subjects", subject),
+	Streams: mongoose.model("Streams", stream)
 }
 
 module.exports=models;

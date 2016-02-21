@@ -1,0 +1,91 @@
+<div id="loginbox" class="mainbox col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-2 margin_top_50">                    
+    <div class="panel panel-info" id="form-pannel">
+        <div class="panel-heading">
+            <div class="panel-title">Add Stream</div>
+        </div>     
+        <div class="panel-body padding-top-30" >
+            <form id="bookForm" method="post" class="form-horizontal">
+        	    <div class="form-group">
+			        <label class="col-sm-2 control-label">Stream Title</label>
+			        <div class="col-sm-6">
+			            <input type="text" class="form-control" name="stream" placeholder="Title" />
+			        </div>
+			    </div>
+			    <div id="optional" class="sub-cat">
+				    <div class="form-group" >
+				        <label class="col-sm-2 control-label">Optional(s)</label>
+				        <div class="col-sm-6">
+				            <input type="text" class="form-control" name="optional" placeholder="Title" />
+				        </div>
+				        <div class="col-sm-2">
+				            <input type="text" class="form-control" name="optional_fullmarks" placeholder="Full Marks" />
+				        </div>
+				        <div class="col-sm-2">
+				            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
+				        </div>
+				    </div>
+			    </div>
+
+			    <div id="compulsory" class="sub-cat">
+				    <div class="form-group">
+				        <label class="col-sm-2 control-label">Compulsory</label>
+				        <div class="temp">
+					        <div class="col-sm-6">
+					            <input type="text" class="form-control" name="compulsory" placeholder="Title" />
+					        </div>
+					        <div class="col-sm-2">
+					            <input type="text" class="form-control" name="compulsory_fullmarks" placeholder="Full Marks" />
+					        </div>
+					        <div class="col-sm-2">
+					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
+					        </div>
+				        </div>
+				    </div>
+			    </div>
+
+			    <div class="form-group">
+			        <div class="col-sm-6 col-md-offset-3">
+			            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+			        </div>
+			    </div>
+			</form>
+
+			<div class="form-group hide" id="template">
+		        <label class="col-sm-2 control-label"></label>
+		        <div class="col-sm-6">
+		            <input type="text" class="form-control title" name="" placeholder="Title" />
+		        </div>
+		        <div class="col-sm-2">
+		            <input type="text" class="form-control fullmarks" name="" placeholder="Full Marks" />
+		        </div>
+		        <div class="col-sm-2">
+		            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
+		        </div>
+		    </div>
+
+        </div>                     
+    </div>  
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(document).on('click', '.addButton', function(e){
+		var target=$(this).closest(".sub-cat");
+		var choice=target.attr("id");
+
+		var template=$("#template").clone().removeAttr("id").removeClass("hide");
+		console.log(template);
+		console.log(template.find("input.fullmarks"));
+		
+		template.find(".title").attr("name", choice);
+		template.find(".fullmarks").attr("name", choice+"_fullmarks");
+		console.log(template.find(".fullmarks").attr("name"));
+		template.appendTo(target);
+	});
+
+	$(document).on('click', '.removeButton', function(e){
+		$(this).closest(".form-group").remove();
+	});
+});
+
+</script>
