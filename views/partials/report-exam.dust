@@ -1,0 +1,70 @@
+<div class="col-lg-12 col-sm-12">
+<form class="form-inline collection-from" method="post">
+  <div class="form-group">
+      <label for="gender" class="col-sm-6 control-label">Select Exam</label>
+      <div class="col-sm-4">
+        <select class="form-control" name="gender" id="gender">
+        <option value="-1">Select Exam</option>
+        {#exams}
+          <option value="{name}">{name}</option>
+        {/exams}
+      </select>
+      </div>
+    </div> 
+  <button type="submit" class="btn btn-default">Generate Report</button>
+</form>
+{?report}
+<table class="table table-hover">
+   <thead> 
+        <tr> 
+            <th>Bill No</th>
+            <th>Date</th> 
+            <th>Student Name</th>
+            <th>Roll Number</th>
+            <th>For Month</th> 
+            <th>Amount</th> 
+            <th>Received By</th> 
+        </tr>
+    </thead>
+    <tbody> 
+        {#report.payments}
+        <tr>
+            <th>{bill_number}</th>
+            <td>{bill_date}</td>
+            <td>{payee_name}</td>
+            <td>{payee_rollnumber}</td>
+            <td>{for_month}</td>
+            <td>{bill_amount}</td>
+            <td>{received_by}</td>
+        </tr>
+        {/report.payments}
+    </tbody> 
+    
+</table>
+{/report}
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery-data-tables.min.js"></script>
+<script>
+  $(function() {
+    $( "#fromdate" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#todate" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#todate" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 2,
+      onClose: function( selectedDate ) {
+        $( "#fromdate" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+
+    $('.table-hover').DataTable({paging: true});
+  });
+ </script>

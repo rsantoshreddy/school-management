@@ -11,21 +11,6 @@
 			            <input type="text" class="form-control" name="stream" placeholder="Title" />
 			        </div>
 			    </div>
-			    <div id="optional" class="sub-cat">
-				    <div class="form-group" >
-				        <label class="col-sm-2 control-label">Optional(s)</label>
-				        <div class="col-sm-6">
-				            <input type="text" class="form-control" name="optional" placeholder="Title" />
-				        </div>
-				        <div class="col-sm-2">
-				            <input type="text" class="form-control" name="optional_fullmarks" placeholder="Full Marks" />
-				        </div>
-				        <div class="col-sm-2">
-				            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
-				        </div>
-				    </div>
-			    </div>
-
 			    <div id="compulsory" class="sub-cat">
 				    <div class="form-group">
 				        <label class="col-sm-2 control-label">Compulsory</label>
@@ -34,11 +19,32 @@
 					            <input type="text" class="form-control" name="compulsory" placeholder="Title" />
 					        </div>
 					        <div class="col-sm-2">
-					            <input type="text" class="form-control" name="compulsory_fullmarks" placeholder="Full Marks" />
-					        </div>
-					        <div class="col-sm-2">
 					            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
 					        </div>
+				        </div>
+				    </div>
+			    </div>
+			    
+			    <div id="optional" class="sub-cat">
+				    <div class="form-group" >
+				        <label class="col-sm-2 control-label">Optional(s)</label>
+				        <div class="col-sm-6">
+				            <input type="text" class="form-control" name="optional" placeholder="Title" />
+				        </div>
+				        <div class="col-sm-2">
+				            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
+				        </div>
+				    </div>
+			    </div>
+
+			    <div id="honours" class="sub-cat">
+				    <div class="form-group" >
+				        <label class="col-sm-2 control-label">Honours</label>
+				        <div class="col-sm-6">
+				            <input type="text" class="form-control" name="honours" placeholder="Title" />
+				        </div>
+				        <div class="col-sm-2">
+				            <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
 				        </div>
 				    </div>
 			    </div>
@@ -56,9 +62,6 @@
 		            <input type="text" class="form-control title" name="" placeholder="Title" />
 		        </div>
 		        <div class="col-sm-2">
-		            <input type="text" class="form-control fullmarks" name="" placeholder="Full Marks" />
-		        </div>
-		        <div class="col-sm-2">
 		            <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
 		        </div>
 		    </div>
@@ -74,12 +77,7 @@ $(function(){
 		var choice=target.attr("id");
 
 		var template=$("#template").clone().removeAttr("id").removeClass("hide");
-		console.log(template);
-		console.log(template.find("input.fullmarks"));
-		
 		template.find(".title").attr("name", choice);
-		template.find(".fullmarks").attr("name", choice+"_fullmarks");
-		console.log(template.find(".fullmarks").attr("name"));
 		template.appendTo(target);
 	});
 

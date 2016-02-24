@@ -44,7 +44,7 @@
 @padding-top-30:30px;
 @success:#3c763d;
 @error:#a94442;
-
+.left-text{text-align: left !important;}
 .box{
   border: 1px solid #31708f;
     border-radius: 5px;
@@ -258,7 +258,7 @@ input.form-control.error{
       background-color:rgba(24,21,11,.6);
       text-decoration: none;
     }
-    &.dash,&.pay,&.register,&.resUser,&.profile,&.collection,&.stream{
+    &.dash,&.pay,&.register,&.resUser,&.profile,&.collection,&.stream,&.exam,&.tests,&.pays{
       background-color:rgba(24,21,11,.6);
     }
   }
@@ -305,8 +305,12 @@ input.form-control.error{
 .checkbox{
   label{
     margin-right: 10px;
+    display: block;
   }
 }
-#compulsory{
-  label{display: block;}
+.billdate{
+  display: inline-block;
+    width: 120px;
+    height: 18px;
+    overflow: hidden;
 }

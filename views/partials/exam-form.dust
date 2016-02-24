@@ -1,0 +1,201 @@
+<div id="loginbox" class="mainbox col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-2 margin_top_50">                    
+    <div class="panel panel-info" id="form-pannel">
+        <div class="panel-heading">
+            <div class="panel-title">Mark Foil</div>
+        </div>     
+        <div class="panel-body padding-top-30" >
+            <p class="error form-error"></p>
+            <form class="form-horizontal" id="mark-foil" method="post">
+            
+            <div class="form-group">
+			    <div class="col-sm-4">
+			    	<label for="exam" class="col-sm-12 control-label left-text">Exam details</label>
+			    </div>
+			</div>
+
+             {!Roll number!}
+			  <div class="form-group">
+			    <div class="col-sm-3">
+			      <input type="text" name="exam" id="exam" class="form-control" placeholder="Exam name"/>
+			    </div>
+			    <div class="col-sm-3">
+			      <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject"/>
+			    </div>
+			    <div class="col-sm-3">
+			      <input type="text" name="dateOfExam" id="dateOfExam" class="form-control" placeholder="Exam Date"/>
+			    </div>
+			    <div class="col-sm-3">
+			      <input type="text" name="fullmarks" id="fullmarks" class="form-control" placeholder="Full Marks"/>
+			    </div>
+			  </div>
+			  <hr>
+			{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+				    <label for="exam" class="col-sm-12 control-label left-text">Roll Number</label>
+			    </div>
+			    <div class="col-sm-4">
+			    	<label for="exam" class="col-sm-12 control-label left-text">Name</label>
+			    </div>
+			    <div class="col-sm-4">
+			    	<label for="exam" class="col-sm-12 control-label left-text">Marks</label>
+			    </div>
+			  </div>
+
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+{!Name!}
+			  <div class="form-group">
+			    <div class="col-sm-4">
+			      <input type="text" name="rollnumber" class="form-control roll" placeholder="Roll Number"  />
+			    </div>
+			    <div class="col-sm-4 name-fields">
+			      <input type="text" placeholder="Name" class="form-control name" value="" readonly="readonly"/>
+			    </div>
+			    <div class="col-sm-4">
+			      <input type="text" name="marks" class="form-control" placeholder="Marks"  />
+			    </div>
+			  </div> 
+
+			  
+			  <div class="form-group">
+			    <div class="col-sm-6 col-md-offset-3">
+			      <button type="submit" class="btn btn-primary btn-block" id="generate">Save</button>
+			    </div>
+			  </div>
+            </form>  
+        </div>                     
+    </div> 
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+	var KeyList="";
+	$.get( "/studentKeyList")
+		.done(function(studentKeyList) {
+		  	KeyList=studentKeyList;
+		  	console.log(studentKeyList);
+		})
+		.fail(function(err) {
+			console.log(err)
+		});
+
+	$(".roll").on('change',function(){
+		var $this=$(this);
+		var rollnumber=$this.val();
+		$this.closest(".form-group").find(".name-fields input").val(KeyList[$this.val()]);
+	});
+	$( "#dateOfExam").datepicker({
+		  showAnim: "slideDown",
+		  changeMonth: true,
+		  changeYear: true,
+		});
+});
+
+</script>

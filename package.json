@@ -16,7 +16,8 @@
     "express": "^4.13.3",
     "express-session": "^1.13.0",
     "formidable": "^1.0.17",
-    "mongoose": "^4.3.6"
+    "mongoose": "^4.3.6",
+    "multer": "^1.1.0"
   },
   "devDependencies": {},
   "repository": {
