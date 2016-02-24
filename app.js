@@ -15,6 +15,7 @@ module.exports=function(){
 		models=require('./schemas');
 		formidable = require('formidable');
 		bcrypt = require('bcryptjs');
+		//multer = require('multer');
 
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
@@ -36,6 +37,17 @@ module.exports=function(){
   		ephemeral: true //delete this cookie when the browser is closed 
   	}));
 
+	/*var storage = multer.diskStorage({
+	  destination: function (request, file, callback) {
+	    callback(null, 'public/photos');
+	  },
+	  filename: function (request, file, callback) {
+	    console.log(file);
+	    callback(null, file.originalname)
+	  }
+	});
+
+	upload = multer({storage: storage}).single('file');*/
 
 	//app.use(csrf());
 	
@@ -65,6 +77,7 @@ module.exports=function(){
 	
 	/*get Student*/
 	app.get('/student', myauth.requreLogin, routes.getStudent);
+	app.get('/studentKeyList', myauth.requreLogin, routes.getStudentKeyList);
 	app.get('/generateBill', myauth.requreLogin, routes.generateBill);
 	
 	//app.get('/updateBills', myauth.requreLogin, routes.updateBills);
@@ -72,12 +85,19 @@ module.exports=function(){
 	app.get('/search', myauth.requreLogin, routes.search);
 	
 	app.get('/register-test', myauth.requreLogin, routes.resisterTest);
+	app.post('/register-test', myauth.requreLogin, routes.updateTest);
 	
 	app.get('/addStream', myauth.requreLogin, routes.addStream);
 	app.post('/addStream', myauth.requreLogin, routes.saveStream);
 
 	app.get('/collection-report', myauth.requreLogin, routes.getCollectionReport);
 	app.post('/collection-report', myauth.requreLogin, routes.showCollectionReport);
+	
+	app.get('/exam-report', myauth.requreLogin, routes.getExamReport);
+	app.post('/exam-report', myauth.requreLogin, routes.postExamReport);
+	
+	app.get('/pay-report', myauth.requreLogin, routes.getPayReport);
+	app.post('/pay-report', myauth.requreLogin, routes.postPayReport);
 
 
 	/*logout routs*/

@@ -1,39 +1,93 @@
 <!DOCTYPE html>
 <html>
 {>"partials/header"/}
+	<link rel="stylesheet" type="text/css" href="css/datatable.css">
+
 <body>
 	{>"partials/page-header"/}
 	<section class="container">
 		<div class="row">
 		  {>"partials/side-menu" dash="dash"/}
+		  <div class="col-md-2 col-md-offset-5 col-sm-3 col-sm-offset-3">
+		  	{?students}<button type="button" class="btn btn-primary btn-block table-view">Table view</button>{/students}
+		  </div>
 		  {?errorMsg}{errorMsg}{/errorMsg}
 		  <div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-1">
 			  	{#students}
 				  	<div class="media">
 					  <div class="media-left">
-					    <a href="#">
+					    <a href="/search?candidate_rollnumber={roll_number}">
 					      <img class="media-object" src="{?photo}/photos/{photo}{:else} /images/avatar.png{/photo}" alt="...">
 					    </a>
 					  </div>
 					  <div class="media-body">
 					  	<span class="close glyphicon glyphicon-remove-circle"></span>
 					    <h4 class="media-heading">{name} ({roll_number})</h4>
-					    <p>Class: {level} | Stream : {stream} | Academic Session : {academic_session} | College : {college_name} | Contact No : {cell_no}</p>
+					    <p>Class: {level} | Academic Session : {academic_session} | College : {college_name} | Contact No : {cell_no}</p>
 					  </div>
 					</div>
+					
 				{/students}
+				 <table class="table table-hover">
+					   <thead> 
+					        <tr> 
+					            <th>Roll Number</th>
+					            <th>Photo</th>
+					            <th>Student Name</th>
+					            <th>Parents's Name</th> 
+					            <th>Gender</th> 
+					            <th>Date Of Birth</th> 
+					            <th>Year of Passing</th> 
+					            <th>Date of Admission</th> 
+					            <th>Class</th>
+					        </tr>
+					    </thead>
+					    <tbody> 
+				{#students}
+					        <tr>
+					            <th>{roll_number}</th>
+					            <td><img src="/photos/{photo}" width="100px"/></td>
+					            <td>{name}</td>
+					            <td>{parent_name}</td>
+					            <td>{gender}</td>
+					            <td>{dob}</td>
+					            <td>{pass_year}</td>
+					            <td>{admission_date}</td>
+					            <td>{level}</td>
+					        </tr>
+					       
+				{/students}	
+					    </tbody> 
+					    
+					</table>
 		  </div>
+
+ 
+</div>
+
 
 		</div>
 	</section>
 	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-data-tables.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		$(".close").on("click",function(){
 			var $this=$(this);
 			$this.closest("div.media").slideUp("slow");
 		});
+		$(".table-view").on("click",function(){
+			$(".dataTables_wrapper,.media").toggleClass("hide");
+			if($(".media").hasClass("hide")){
+				$(this).text("Normal View");	
+			}else{
+				$(this).text("Table View");
+			}
+		});
+		 $('.table-hover').DataTable({paging: true});
+		$(".dataTables_wrapper").addClass("hide");
 	});
 	</script>
+	
 </body>
 </html>

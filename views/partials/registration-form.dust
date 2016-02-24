@@ -6,17 +6,34 @@
 
         <div class="panel-body padding-top-30" >
             {?successMsg}{successMsg}{/successMsg}
-            {?error}{error}{/error}
+            {?errorMsg}{errorMsg}{/errorMsg}
             <form class="form-horizontal" method="post">
-            {!hidden input fields start!}
-				<input type="hidden" name="_csrf" value="{csrfToken}" />
-			{!hidden input fields end!}
-                
 			{!Name!}
 			  <div class="form-group">
 			    <label for="sname" class="col-sm-4 control-label">Name of the student</label>
 			    <div class="col-sm-8">
 			      <input type="text" name="sname" id="sname" class="form-control" placeholder="Name of the student" />
+			    </div>
+			  </div> 
+
+			  {!DoB!}
+			  <div class="form-group">
+			    <label for="dob" class="col-sm-4 control-label">Date Of Birth</label>
+			    <div class="col-sm-8">
+			      <input type="text" name="dob" id="dob" class="form-control" placeholder="Date Of Birth" />
+			    </div>
+			  </div> 
+
+			   {!DoB!}
+			  <div class="form-group">
+			    <label for="gender" class="col-sm-4 control-label">Gender</label>
+			    <div class="col-sm-8">
+			      <select class="form-control" name="gender" id="gender">
+				    <option value="-1">Select Session</option>
+				    <option value="Male">Male</option>
+				    <option value="Female">Female</option>
+				    <option value="Other">Other</option>
+				  </select>
 			    </div>
 			  </div> 
 
@@ -30,54 +47,60 @@
 
 			  {!Academic session!}
 			  	<div class="form-group">
+		    	<label for="pass_year"  class="col-sm-4 control-label">Year Of Passing</label>
+				  <div class="col-sm-8">
+				  <select class="form-control" name="pass_year" id="pass_year">
+				    <option value="-1">Select Year</option>
+				    <option value="2016">2016</option>
+				    <option value="2017">2017</option>
+				    <option value="2018">2018</option>
+				    <option value="2019">2019</option>
+				    <option value="2020">2020</option>
+				  </select>
+				</div>
+				</div>
+
+			  {!Academic session!}
+			  	<div class="form-group">
 		    	<label for="academicSession"  class="col-sm-4 control-label">Academic Session</label>
 				  <div class="col-sm-8">
 				  <select class="form-control" name="academicSession" id="academicSession">
 				    <option value="-1">Select Session</option>
-				    <option value="2012-2014">2012-2014</option>
-				    <option value="2013-2015">2013-2015</option>
-				    <option value="2014-2016">2014-2016</option>
-				    <option value="2015-2017">2015-2017</option>
-				    <option value="2016-2018">2016-2018</option>
-				    <option value="2017-2019">2017-2019</option>
-				    <option value="2018-2020">2018-2020</option>
+				    <option value="2012-2014">2012-2013</option>
+				    <option value="2013-2015">2013-2014</option>
+				    <option value="2014-2016">2014-2015</option>
+				    <option value="2015-2017">2015-2016</option>
+				    <option value="2016-2018">2016-2017</option>
+				    <option value="2017-2019">2017-2018</option>
+				    <option value="2018-2020">2018-2019</option>
+				    <option value="2018-2020">2019-2020</option>
 				  </select>
 				</div>
 				</div>
 
 			  {!Level!}
 			  <div class="form-group">
-		    	<label for="level"  class="col-sm-4 control-label">Class</label>
+		    	<label for="level"  class="col-sm-4 control-label">Class and Stream</label>
 				  <div class="col-sm-8">
 				  <select class="form-control" name="level" id="level">
 				    <option value="-1">Select Class</option>
 				    {#streams}
-				    	<option>{name}</option>
+				    	<option value="{name}">{name}</option>
 				    {/streams}
 				  </select>
 				</div>
 				</div>
 
-			  {!Stream!}
-			  <div class="form-group">
-		    	<label for="stream"  class="col-sm-4 control-label">Stream</label>
-				  <div class="col-sm-8">
-				  <select class="form-control" name="stream" id="stream">
-				    <option value="-1">Select Stream</option>
-				    <option value="arts">Arts</option>
-				    <option value="commerce">Commerce</option>
-				    <option value="science">Science</option>
-				  </select>
-				</div>
-			</div>
-
-			<div class="form-group">
+			<div class="form-group hide" id="subs">
 		    	<label for="subjects"  class="col-sm-4 control-label">Subjects Opted</label>
 				  <div class="col-sm-8">
+					 <div class="checkbox" id="compulsory">
+					    
+					 </div>
 					  <div class="checkbox" id="optionals">
 					    
 					 </div>
-					 <div class="checkbox" id="compulsory">
+					 <div class="checkbox" id="honours">
 					    
 					 </div>
 					
@@ -188,8 +211,11 @@
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$( "#admissionDate").datepicker({
-		  showAnim: "slideDown"
+		$( "#admissionDate,#dob").datepicker({
+		  showAnim: "slideDown",
+		  changeMonth: true,
+		  changeYear: true,
+		  yearRange: "-30:+0"
 		});
 		$("#imagefile").on("change", function(){
 			var inputFile = $(this);
@@ -198,24 +224,35 @@
 		});
 
 
-		$("#stream").on("change",function(){
+		$("#level").on("change",function(){
 			var stream= $(this).val();
+
 			$.get("/getSubjects", {stream: stream}).done(function(subjects){
+				if(subjects){
+					$("#subs").removeClass("hide");
+				}
 				var optionals=subjects.optionals;
 				var compulsory=subjects.compulsory;
-				$("#optionals,#compulsory").html("");
-					for(subj in optionals){
-						$('#optionals').append( "<label><input type='checkbox' name='subjects' value='"+optionals[subj]+"'/>"+optionals[subj]+"</label>")
+				var honours=subjects.honours;
+				$("#optionals,#compulsory,#honours").html("");
+				
+				for(subj in optionals){
+					$('#optionals').append( "<label><input type='checkbox' name='subjects' value='"+optionals[subj].name+"' checked/>"+optionals[subj].name+"</label>")
+				}
+				for(subj in compulsory){
+					$('#compulsory').append( "<label><input type='checkbox' name='subjects' value='"+compulsory[subj].name+"'/>"+compulsory[subj].name+"</label>")
+				}
+
+				if(honours){
+					for(subj in honours){
+						$('#honours').append( "<label><input type='checkbox' name='subjects' value='"+honours[subj].name+"' checked/>"+honours[subj].name+"</label>")
 					}
-					for(subj in compulsory){
-						$('#compulsory').append( "<label><input type='checkbox' name='subjects' value='"+compulsory[subj]+"' checked/>"+compulsory[subj]+"</label>")
-					}
+				}
 			});
 		});
 
-		$('body').on('click', '#optionals label input[type=checkbox]', function() {
-			console.log($(this));
-			$("#optionals").find("input[type=checkbox]").attr("disabled", true);
+		$('body').on('click', '#compulsory label input[type=checkbox]', function() {
+			$("#compulsory").find("input[type=checkbox]").attr("disabled", true);
 			$(this).removeAttr("disabled");
 		});
 	});

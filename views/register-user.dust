@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	{>"partials/header"/}
+	{>"partials/header" utilHeader="true" /}
 <body>
 	{>"partials/page-header"/}
 	{>"partials/side-menu" resUser="resUser"/}

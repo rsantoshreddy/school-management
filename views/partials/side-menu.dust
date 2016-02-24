@@ -13,7 +13,7 @@
 			<a href="/register" class="{?resUser}{resUser}{/resUser}">Register Users</a>
 		</li>
 		<li>
-			<a href="/register-test" class="{?test}{test}{/test}">Register Test</a>
+			<a href="/register-test" class="{?exam}{exam}{/exam}">Register Test</a>
 		</li>
 		<li>
 			<a href="/collection-report" class="{?collection}{collection}{/collection}">Collection Report</a>
@@ -21,8 +21,14 @@
 		<li>
 			<a href="/addStream" class="{?stream}{stream}{/stream}">Add Stream</a>
 		</li>
+		<li>
+			<a href="/exam-report" class="{?tests}{tests}{/tests}">Academic Report</a>
+		</li>
+		<li>
+			<a href="/pay-report" class="{?pays}{pays}{/pays}">Payment Report</a>
+		</li>
 		{?profile}
-		<li><a href="/register" class="{profile}">Profile</a></li>
+		<li><a class="{profile}">Profile</a></li>
 		{/profile}
   	</ul>
 </div>
